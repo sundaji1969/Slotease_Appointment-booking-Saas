@@ -1,0 +1,16 @@
+.env
+node_modules/
+__pycache__/
+.venv/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+frontend/dist/
+frontend/test-results/
+frontend/playwright-report/
+.claude/settings.local.json
+*.docx
+backend/.venv/
