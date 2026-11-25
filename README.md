@@ -163,7 +163,19 @@ cd frontend && npx playwright install chromium && npm run e2e   # needs the API 
 3. **Vercel:** import `frontend/` and set `VITE_API_URL` = Render URL. `vercel.json` rewrites every path to `index.html`, so `/glow-salon` works on refresh.
 4. Update `CORS_ORIGINS` on Render to the final Vercel URL.
 
-Self-hosting on a VPS: `docker compose up -d --build` runs Postgres and the API. Put the built `frontend/dist` behind any static host or reverse proxy with an SPA fallback.
+### Self-hosting on a VPS (Docker)
+
+Everything is served on one port through nginx: `/` is the app and `/api` is the API. The database and API ports are not exposed.
+
+```bash
+git clone https://github.com/sundaji1969/Slotease_Appointment-booking-Saas.git slotease && cd slotease
+cp .env.prod.example .env.prod   # set POSTGRES_PASSWORD, JWT_SECRET, CORS_ORIGINS/APP_BASE_URL=http://SERVER_IP:8080, OPENAI_API_KEY
+docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
+docker compose -f docker-compose.prod.yml --env-file .env.prod exec api python -m scripts.seed   # optional demo data
+```
+
+Open `http://SERVER_IP:8080/glow-salon`. Allow the port in the firewall if needed (`ufw allow 8080/tcp`).
+To update: `git pull && docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build`.
 
 ## Claude Code setup
 

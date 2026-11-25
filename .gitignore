@@ -14,3 +14,4 @@ frontend/playwright-report/
 .claude/settings.local.json
 *.docx
 backend/.venv/
+.env.prod
