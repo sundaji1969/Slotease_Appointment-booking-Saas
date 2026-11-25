@@ -10,6 +10,7 @@ services:
       traefik.docker.network: n8n_default
       traefik.http.routers.slotease-web.rule: Host(`${SLOTEASE_HOST:?set SLOTEASE_HOST}`)
       traefik.http.routers.slotease-web.entrypoints: websecure
+      traefik.http.routers.slotease-web.priority: "10"
       traefik.http.routers.slotease-web.tls: "true"
       traefik.http.routers.slotease-web.tls.certresolver: mytlschallenge
       traefik.http.routers.slotease-web.middlewares: slotease-hsts

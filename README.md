@@ -8,8 +8,8 @@ Multi-tenant MicroSaaS (₹499/month per business). Each business gets:
 
 | | URL |
 |---|---|
-| Frontend (Vercel) | _add after deploy_ |
-| API (Render) | _add after deploy_ · docs at `/docs` |
+| Live app | https://slotease.sundajigenai.tech (demo: [/glow-salon](https://slotease.sundajigenai.tech/glow-salon)) |
+| API | https://slotease.sundajigenai.tech/api (health: `/api/health`) |
 
 Screenshots: _booking page (mobile)_ · _dashboard_ · _409 demo_ (add yours here)
 
@@ -153,7 +153,7 @@ cd frontend && npx playwright install chromium && npm run e2e   # needs the API 
 - [x] Business A can't touch Business B data: `TenantContext` + `scoped()` repositories, `tests/tenancy`
 - [x] Slots respect working hours, duration and existing bookings: `services/slots.py`, `tests/unit/test_slots.py`
 - [x] Booking page works on mobile: 360px layout, 48px tap targets, sticky confirm, Playwright mobile viewport
-- [x] Hashed passwords (bcrypt, cost 12), secrets in `.env` (`.env.example` committed), live URL: _fill in after deploy_
+- [x] Hashed passwords (bcrypt, cost 12), secrets in `.env` (`.env.example` committed), live URL: https://slotease.sundajigenai.tech
 - [x] README covers setup, DB tables and API endpoints
 
 ## Deploy (Phase 10)
