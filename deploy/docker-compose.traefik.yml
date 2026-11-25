@@ -1,0 +1,22 @@
+# Overlay for a server that already runs Traefik on the external network "n8n_default".
+#   docker compose -f docker-compose.prod.yml -f deploy/docker-compose.traefik.yml --env-file .env.prod up -d --build
+# Set SLOTEASE_HOST in .env.prod (e.g. slotease.example.com); its DNS must point at the server.
+services:
+  web:
+    ports: !reset []
+    networks: [default, traefik]
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: n8n_default
+      traefik.http.routers.slotease-web.rule: Host(`${SLOTEASE_HOST:?set SLOTEASE_HOST}`)
+      traefik.http.routers.slotease-web.entrypoints: websecure
+      traefik.http.routers.slotease-web.tls: "true"
+      traefik.http.routers.slotease-web.tls.certresolver: mytlschallenge
+      traefik.http.routers.slotease-web.middlewares: slotease-hsts
+      traefik.http.middlewares.slotease-hsts.headers.stsSeconds: "31536000"
+      traefik.http.services.slotease-web.loadbalancer.server.port: "80"
+
+networks:
+  traefik:
+    name: n8n_default
+    external: true
